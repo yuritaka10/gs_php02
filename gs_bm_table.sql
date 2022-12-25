@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2022 年 12 月 14 日 05:41
+-- 生成日時: 2022 年 12 月 25 日 13:11
 -- サーバのバージョン： 10.4.21-MariaDB
 -- PHP のバージョン: 8.1.6
 
@@ -29,12 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `gs_bm_table` (
   `id` int(12) NOT NULL,
-  `ride_day` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `horse` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `instructor` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `ride_day` date NOT NULL,
   `activity` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `instructor` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `advice` text COLLATE utf8_unicode_ci NOT NULL,
+  `horse` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `horse_habit` text COLLATE utf8_unicode_ci NOT NULL,
   `rating` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `good` text COLLATE utf8_unicode_ci NOT NULL,
+  `improvements` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -42,14 +45,8 @@ CREATE TABLE `gs_bm_table` (
 -- テーブルのデータのダンプ `gs_bm_table`
 --
 
-INSERT INTO `gs_bm_table` (`id`, `ride_day`, `horse`, `instructor`, `activity`, `rating`, `comment`, `date`) VALUES
-(1, '1002', 'uma', 'sense', 'fw', '5', 'comments', '2022-12-12 16:46:27'),
-(2, 'Sfdgz', 'ジーズ', '5dfs', 'fw', '2', 'dsffdg', '2022-12-12 17:26:46'),
-(3, 'afd', 'sfgdvv', 'gfghf', 'fw', '2', 'sfdghfh', '2022-12-12 17:27:23'),
-(4, 'afd', 'sfgdvv', 'gfghf', 'fw', '2', 'sfdghfh', '2022-12-12 17:33:12'),
-(5, 'aereg', 'argefd', 'fdghj', 'fw', '2', 'srthgfx', '2022-12-12 17:35:06'),
-(6, 'afd', 'ジーズ', 'xfgjh', 'fw', '2', 'llll', '2022-12-12 17:46:14'),
-(7, 'Sfdgz', 'fhg', 'asfd', 'fw', '3', 'SFBz', '2022-12-14 11:39:59');
+INSERT INTO `gs_bm_table` (`id`, `ride_day`, `activity`, `instructor`, `advice`, `horse`, `horse_habit`, `rating`, `good`, `improvements`, `date`) VALUES
+(10, '2022-12-11', 'fw', '山崎先生', '隅角を意識する', 'マリンアイル', '左の口が硬い', '3', 'lkjhg', 'oihgjfh', '2022-12-25 21:01:21');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -69,7 +66,7 @@ ALTER TABLE `gs_bm_table`
 -- テーブルの AUTO_INCREMENT `gs_bm_table`
 --
 ALTER TABLE `gs_bm_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
