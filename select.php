@@ -1,52 +1,5 @@
-<?php
-
-function h($str){
-  return htmlspecialchars($str, ENT_QUOTES);
-}
-
-//1.  DB接続します
-try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gs_bm_table;charset=utf8;host=localhost', 'root', '');
-} catch (PDOException $e) {
-  exit('DBConnectError'.$e->getMessage());
-}
-
-//２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table;");
-$status = $stmt->execute();
-
-
-//３．データ表示
-$view="";
-$count="";
-
-if ($status==false) {
-    //execute（SQL実行時にエラーがある場合）
-  $error = $stmt->errorInfo();
-  exit("ErrorQuery:".$error[2]);
-
-}else{
-  //elseの中はSQL実行が成功した場合
-  //Selectデータの数だけ自動でループしてくれる
-  //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
-  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= 
-    '<p>' 
-    . $result['id'] 
-    . '/' . h($result['ride_day'])
-    . '/' . h($result['horse'])
-    . '/' . h($result['instructor'])
-    . '/' . h($result['activity'])
-    . '/' . h($result['rating'])
-    . '/' . h($result['comment'])
-    . '</p>';
-
-    $count++;
-  }
-}
-
-
+<?php ini_set('display_errors', 'On');  // ここ：エラーを表示させるようにしてください
+error_reporting(E_ALL);           //ここ：全てのレベルのエラーを表示してください
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +11,8 @@ if ($status==false) {
     <title>Saddle</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <?php require_once('./count.php'); ?>
+
 
 </head>
 <body>
@@ -71,18 +26,21 @@ if ($status==false) {
 
   <div class="count_all">
       <?php 
-        echo "これまで乗った回数は" . $count . "回です！"; 
+        echo "これまで乗った回数は" . $count . "鞍です！"; 
       ?>
   </div>
 
-
   <div>
       <div class="container jumbotron"><?= $view ?></div>
+      
   </div>
+
 
   <div style="margin-top: 20px;">
         <a href="index.php"><button>レッスンを記録する</button></a>
    </div>
+
+</main>
 
 </body>
 </html>

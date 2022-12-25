@@ -1,16 +1,12 @@
 <?php
 //1.  DB接続します
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_bm_table;charset=utf8;host=localhost', 'root', '');
-  } catch (PDOException $e) {
-    exit('DBConnectError'.$e->getMessage());
-  }
+require_once('funcs.php');
+$pdo = db_conn();
   
 //２．データ取得SQL作成
 $stmt = $pdo->prepare("SELECT * FROM gs_bm_table;");
 $status = $stmt->execute();
-
+$count = 0;
 
 //3.データ表示
 
@@ -41,6 +37,9 @@ if ($status==false) {
     <title>Saddle</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 </head>
 <body>
@@ -48,37 +47,54 @@ if ($status==false) {
     
     <header class="header">
     
-        <h1>騎乗記録記入画面</h1>
+        <h1>SADDLE</h1>
     </header> 
 
     <main>
 
     <div class="count_all">
     <?php 
-    echo "これまで乗った回数は" . $count . "回です！"; 
+    echo "これまで乗った回数は" . $count . "鞍です！"; 
     ?>
 
 </div>
+
 
 
     <form action="insert.php" method="post">
     <div class="jumbotron">
             <fieldset>
         <div class="bold">日付</div>
-         <input type="text" name="ride_day">
-        <div class="bold">インストラクター名</div>
-             <input type="text" name="instructor">
-        <p class="bold">馬名</p>
-            <input type="text" name="horse">
+        <input type="text" id="datepicker" name="ride_day">
+            <script>$(function() {
+                $('#datepicker').datepicker({
+                  dateFormat: 'yy/mm/dd'
+                });
 
-        <p class="bold">レッスン構成</p>
-         
+            });
+            </script>
+
         <div> 
+        <p class="bold">レッスン構成</p>
             <label><input type="radio" name="activity" value="fw">フラットワーク</label>
             <label><input type="radio" name="activity" value="ju">障害飛越</label>
             <label><input type="radio" name="activity" value="dr">馬場馬術</label>
             <label><input type="radio" name="activity" value="cc">クロスカントリー</label>
         </div>  
+
+        
+      <div class="bold">インストラクター名</div>
+             <input type="text" name="instructor">
+
+      <div class="bold">インストラクターからのアドバイス</div>
+        <label><textArea name="advice" rows="4" cols="40"></textArea></label><br>
+
+        <p class="bold">馬名</p>
+        <input type="text" name="horse">
+
+         <div class="bold">馬の癖・特徴</div>
+        <label><textArea name="horse_habit" rows="4" cols="40"></textArea></label><br>
+
         <div class="bold">今日の自分に点数をつけるなら</div>
             <label><input type="radio" name="rating" value="1">1</label>
             <label><input type="radio" name="rating" value="2">2</label>
@@ -86,8 +102,10 @@ if ($status==false) {
             <label><input type="radio" name="rating" value="4">4</label>
             <label><input type="radio" name="rating" value="5">5</label>
         
-        <div class="bold">コメント</div>
-        <label><textArea name="comment" rows="4" cols="40"></textArea></label><br>
+        <div class="bold">今回のレッスンでうまくできたこと</div>
+        <label><textArea name="good" rows="4" cols="40"></textArea></label><br>
+        <div class="bold">今回のレッスンでうまくできなかったこと</div>
+        <label><textArea name="improvements" rows="4" cols="40"></textArea></label><br>
 
         <div><input type="submit" value="送信"></div>
         </fieldset>
@@ -97,5 +115,7 @@ if ($status==false) {
     <div style="margin-top: 20px;">
         <a href="select.php"><button>レッスン記録を見る</button></a>
     </div>
+
+
 </body>
 </html>
