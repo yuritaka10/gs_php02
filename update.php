@@ -14,8 +14,6 @@ error_reporting(E_ALL);           //ここ：全てのレベルのエラーを�
 
 
 
-//入力チェック
-
 //1. POSTデータ取得
 $ride_day = $_POST['ride_day'];
 $activity = $_POST['activity'];

@@ -19,6 +19,11 @@ $stmt = $pdo->prepare('SELECT * FROM gs_bm_table WHERE id = :id;');
 $stmt->bindValue(':id', $id, PDO::PARAM_INT); //PARAM_INTなので注意
 $status = $stmt->execute();
 
+$fw ="";
+$jp ="";
+$dr ="";
+$cc ="";
+
 //４．データ登録処理後
 if ($status === false) {
     //*** function化する！******\
@@ -29,15 +34,22 @@ if ($status === false) {
     $result = $stmt->fetch();
 }
 
+//運動内容ラジオぼたんチェック
+if( $result['activity' === 'fw']){
+    $fw ="checked";
+}elseif($result['activity' === 'jp']){
+    $jp= "checked";
+}elseif($result['activity' === 'dr']){
+    $dr= "checked";
+}elseif($result['activity' === 'cc']){
+    $cc= "checked";
+}
+
+//点数
+$rating = $result['rating']
 ?>
-<!--
-２．HTML
-以下にindex.phpのHTMLをまるっと貼り付ける！
-(入力項目は「登録/更新」はほぼ同じになるから)
-※form要素 input type="hidden" name="id" を１項目追加（非表示項目）
-※form要素 action="update.php"に変更
-※input要素 value="ここに変数埋め込み"
--->
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -74,10 +86,10 @@ if ($status === false) {
 
         <div> 
         <p class="bold">レッスン構成</p>
-            <label><input type="radio" name="activity" value="fw" checked>フラットワーク</label>
-            <label><input type="radio" name="activity" value="ju">障害飛越</label>
-            <label><input type="radio" name="activity" value="dr">馬場馬術</label>
-            <label><input type="radio" name="activity" value="cc">クロスカントリー</label>
+            <label><input type="radio" name="activity" value="fw" checked= <?php $fw ?>>フラットワーク</label>
+            <label><input type="radio" name="activity" value="ju" checked= <?php $ju ?>>障害飛越</label>
+            <label><input type="radio" name="activity" value="dr" checked= <?php $dr ?>>馬場馬術</label>
+            <label><input type="radio" name="activity" value="cc" checked= <?php $cc ?>>クロスカントリー</label>
         </div>  
 
         
@@ -94,11 +106,11 @@ if ($status === false) {
         <label><textArea name="horse_habit" rows="4" cols="40"><?=h($result['horse_habit'])?></textArea></label><br>
 
         <div class="bold">今日の自分に点数をつけるなら</div>
-            <label><input type="radio" name="rating" value="1">1</label>
-            <label><input type="radio" name="rating" value="2">2</label>
-            <label><input type="radio" name="rating" value="3" checked>3</label>
-            <label><input type="radio" name="rating" value="4">4</label>
-            <label><input type="radio" name="rating" value="5">5</label>
+            <label><input type="radio" name="rating" value="1" checked= <?php $rating ?>>1</label>
+            <label><input type="radio" name="rating" value="2" checked= <?php $rating ?>>2</label>
+            <label><input type="radio" name="rating" value="3" checked= <?php $rating ?>>3</label>
+            <label><input type="radio" name="rating" value="4" checked= <?php $rating ?>>4</label>
+            <label><input type="radio" name="rating" value="5" checked= <?php $rating ?>>5</label>
         
         <div class="bold">今回のレッスンでうまくできたこと</div>
         <label><textArea name="good" rows="4" cols="40"><?=h($result['good'])?></textArea></label><br>
