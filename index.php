@@ -65,7 +65,7 @@ if ($status==false) {
     <div class="jumbotron">
             <fieldset>
         <div class="bold">日付</div>
-        <input type="text" id="datepicker" name="ride_day">
+        <input type="date" id="datepicker" name="ride_day">
             <script>$(function() {
                 $('#datepicker').datepicker({
                   dateFormat: 'yy/mm/dd'

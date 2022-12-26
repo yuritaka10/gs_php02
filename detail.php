@@ -20,7 +20,7 @@ $stmt->bindValue(':id', $id, PDO::PARAM_INT); //PARAM_INTなので注意
 $status = $stmt->execute();
 
 $fw ="";
-$jp ="";
+$ju ="";
 $dr ="";
 $cc ="";
 
@@ -31,22 +31,24 @@ if ($status === false) {
     exit('SQLError:' . print_r($error, true));
 } else {
     // データが取得できた場合の処理
-    $result = $stmt->fetch();
-}
+     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 //運動内容ラジオぼたんチェック
-if( $result['activity' === 'fw']){
-    $fw ="checked";
-}elseif($result['activity' === 'jp']){
-    $jp= "checked";
-}elseif($result['activity' === 'dr']){
-    $dr= "checked";
-}elseif($result['activity' === 'cc']){
-    $cc= "checked";
+if( $result['activity'] === "fw"){
+    $fw ='checked = "checked"';
+}elseif($result['activity'] === "ju"){
+    $ju='checked = "checked"';
+}elseif($result['activity'] === "dr"){
+    $dr='checked = "checked"';
+}elseif($result['activity'] === "cc"){
+    $cc='checked = "checked"';
 }
 
-//点数
-$rating = $result['rating']
+
+//点数ラジオボタンチェック
+
+
 ?>
 
 
@@ -55,7 +57,7 @@ $rating = $result['rating']
 
 <head>
     <meta charset="UTF-8">
-    <title>データ登録</title>
+    <title>記録詳細</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -73,9 +75,12 @@ $rating = $result['rating']
         <form action="update.php" method="post">
     <div class="jumbotron">
             <fieldset>
+
         <input type="hidden" name="id" value="<?= h($result['id'])?>">
+
+        <?php var_dump($result);  ?>
         <div class="bold">日付</div>
-        <input type="text" id="datepicker" name="ride_day" value="<?= h($result['ride_day'])?>">
+        <input type="date" id="datepicker" name="ride_day" value="<?= h($result['ride_day'])?>">
             <script>$(function() {
                 $('#datepicker').datepicker({
                   dateFormat: 'yy/mm/dd'
@@ -86,10 +91,10 @@ $rating = $result['rating']
 
         <div> 
         <p class="bold">レッスン構成</p>
-            <label><input type="radio" name="activity" value="fw" checked= <?php $fw ?>>フラットワーク</label>
-            <label><input type="radio" name="activity" value="ju" checked= <?php $ju ?>>障害飛越</label>
-            <label><input type="radio" name="activity" value="dr" checked= <?php $dr ?>>馬場馬術</label>
-            <label><input type="radio" name="activity" value="cc" checked= <?php $cc ?>>クロスカントリー</label>
+            <label><input type="radio" name="activity" value="fw" <?php $fw ?>>フラットワーク</label>
+            <label><input type="radio" name="activity" value="ju" <?php $ju ?>>障害飛越</label>
+            <label><input type="radio" name="activity" value="dr" <?php $dr ?>>馬場馬術</label>
+            <label><input type="radio" name="activity" value="cc" <?php $cc ?>>クロスカントリー</label>
         </div>  
 
         
@@ -106,17 +111,16 @@ $rating = $result['rating']
         <label><textArea name="horse_habit" rows="4" cols="40"><?=h($result['horse_habit'])?></textArea></label><br>
 
         <div class="bold">今日の自分に点数をつけるなら</div>
-            <label><input type="radio" name="rating" value="1" checked= <?php $rating ?>>1</label>
-            <label><input type="radio" name="rating" value="2" checked= <?php $rating ?>>2</label>
-            <label><input type="radio" name="rating" value="3" checked= <?php $rating ?>>3</label>
-            <label><input type="radio" name="rating" value="4" checked= <?php $rating ?>>4</label>
-            <label><input type="radio" name="rating" value="5" checked= <?php $rating ?>>5</label>
+            <label><input type="radio" name="rating" value="1">1</label>
+            <label><input type="radio" name="rating" value="2">2</label>
+            <label><input type="radio" name="rating" value="3">3</label>
+            <label><input type="radio" name="rating" value="4">4</label>
+            <label><input type="radio" name="rating" value="5">5</label>
         
         <div class="bold">今回のレッスンでうまくできたこと</div>
         <label><textArea name="good" rows="4" cols="40"><?=h($result['good'])?></textArea></label><br>
         <div class="bold">今回のレッスンでうまくできなかったこと</div>
         <label><textArea name="improvements" rows="4" cols="40"><?=h($result['improvements'])?></textArea></label><br>
-        <input type="hidden" name="id" value="<?= h($result['id'])?>">
         <div><input type="submit" value="送信"></div>
         </fieldset>
         </div>

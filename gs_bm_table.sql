@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2022 年 12 月 25 日 13:11
+-- 生成日時: 2022 年 12 月 26 日 01:57
 -- サーバのバージョン： 10.4.21-MariaDB
 -- PHP のバージョン: 8.1.6
 
@@ -35,7 +35,7 @@ CREATE TABLE `gs_bm_table` (
   `advice` text COLLATE utf8_unicode_ci NOT NULL,
   `horse` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `horse_habit` text COLLATE utf8_unicode_ci NOT NULL,
-  `rating` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `rating` int(1) NOT NULL,
   `good` text COLLATE utf8_unicode_ci NOT NULL,
   `improvements` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL
@@ -46,7 +46,8 @@ CREATE TABLE `gs_bm_table` (
 --
 
 INSERT INTO `gs_bm_table` (`id`, `ride_day`, `activity`, `instructor`, `advice`, `horse`, `horse_habit`, `rating`, `good`, `improvements`, `date`) VALUES
-(10, '2022-12-11', 'fw', '山崎先生', '隅角を意識する', 'マリンアイル', '左の口が硬い', '3', 'lkjhg', 'oihgjfh', '2022-12-25 21:01:21');
+(10, '2022-12-11', 'cc', '山崎先生', '隅角を意識する', 'マリンアイル', '左の口が硬い', 3, 'lkjhg', 'oihgjfh', '2022-12-26 09:19:20'),
+(13, '2022-12-15', 'fw', '山崎先生', '姿勢がチェアシートになりがち', 'ジーズ', '右回転でオーバーランしがち', 3, '内方脚を意識して使うことができた', '焦ると回転の際外方の手綱が外れてしまう', '2022-12-26 09:15:08');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -66,7 +67,7 @@ ALTER TABLE `gs_bm_table`
 -- テーブルの AUTO_INCREMENT `gs_bm_table`
 --
 ALTER TABLE `gs_bm_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
