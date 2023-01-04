@@ -1,33 +1,3 @@
-<?php
-//1.  DB接続します
-require_once('funcs.php');
-$pdo = db_conn();
-  
-//２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table;");
-$status = $stmt->execute();
-$count = 0;
-
-//3.データ表示
-
-if ($status==false) {
-    //execute（SQL実行時にエラーがある場合）
-  $error = $stmt->errorInfo();
-  exit("ErrorQuery:".$error[2]);
-
-}else{
-  //elseの中はSQL実行が成功した場合
-  //Selectデータの数だけ自動でループしてくれる
-  //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
-  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $count++;
-  }
-
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -40,6 +10,7 @@ if ($status==false) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <?php require_once('count.php');?>
 
 </head>
 <body>
@@ -66,13 +37,13 @@ if ($status==false) {
             <fieldset>
         <div class="bold">日付</div>
         <input type="date" id="datepicker" name="ride_day">
-            <script>$(function() {
+            <!-- <script>$(function() {
                 $('#datepicker').datepicker({
                   dateFormat: 'yy/mm/dd'
                 });
 
             });
-            </script>
+            </script> -->
 
         <div> 
         <p class="bold">レッスン構成</p>

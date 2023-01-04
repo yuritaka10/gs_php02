@@ -11,6 +11,7 @@ require_once('funcs.php');
 $pdo = db_conn();
 
 //２．データ取得SQL作成
+//prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
 $stmt = $pdo->prepare("SELECT activity FROM gs_bm_table");
 $status = $stmt->execute();
 
@@ -32,8 +33,7 @@ if ($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $activities .=
-    $result['activity'];
+    var_dump($result);
   }
 }
 

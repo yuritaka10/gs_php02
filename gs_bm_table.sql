@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2022 年 12 月 26 日 01:57
+-- 生成日時: 2023 年 1 月 02 日 04:41
 -- サーバのバージョン： 10.4.21-MariaDB
 -- PHP のバージョン: 8.1.6
 
@@ -46,8 +46,9 @@ CREATE TABLE `gs_bm_table` (
 --
 
 INSERT INTO `gs_bm_table` (`id`, `ride_day`, `activity`, `instructor`, `advice`, `horse`, `horse_habit`, `rating`, `good`, `improvements`, `date`) VALUES
-(10, '2022-12-11', 'cc', '山崎先生', '隅角を意識する', 'マリンアイル', '左の口が硬い', 3, 'lkjhg', 'oihgjfh', '2022-12-26 09:19:20'),
-(13, '2022-12-15', 'fw', '山崎先生', '姿勢がチェアシートになりがち', 'ジーズ', '右回転でオーバーランしがち', 3, '内方脚を意識して使うことができた', '焦ると回転の際外方の手綱が外れてしまう', '2022-12-26 09:15:08');
+(10, '2022-12-11', 'cc', '山崎先生', '隅角を意識する', 'マリンアイル', '左の口が硬い', 5, 'lkjhg', 'oihgjfh', '2022-12-26 11:25:11'),
+(13, '2022-12-15', 'fw', '山崎先生', '姿勢がチェアシートになりがち', 'ジーズ', '右回転でオーバーランしがち', 3, '内方脚を意識して使うことができた', '焦ると回転の際外方の手綱が外れてしまう', '2022-12-26 09:15:08'),
+(14, '2022-11-29', 'fw', '山崎先生', '馬の背を緊張させないように', 'マリンアイル', '重心が前になるとつまづきやすいので起こしておくとよい', 3, '以前よりうまく推進できるようになってきたと思う', '馬の背がリラックスした状態で重心を上に持ってくることができなかった。', '2022-12-26 11:33:26');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -67,7 +68,7 @@ ALTER TABLE `gs_bm_table`
 -- テーブルの AUTO_INCREMENT `gs_bm_table`
 --
 ALTER TABLE `gs_bm_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

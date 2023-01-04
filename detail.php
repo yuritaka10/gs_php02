@@ -36,19 +36,28 @@ if ($status === false) {
 
 //運動内容ラジオぼたんチェック
 if( $result['activity'] === "fw"){
-    $fw ='checked = "checked"';
+    $fw = "checked";
 }elseif($result['activity'] === "ju"){
-    $ju='checked = "checked"';
+    $ju= "checked";
 }elseif($result['activity'] === "dr"){
-    $dr='checked = "checked"';
+    $dr= "checked";
 }elseif($result['activity'] === "cc"){
-    $cc='checked = "checked"';
+    $cc= "checked";
 }
 
 
 //点数ラジオボタンチェック
-
-
+if( $result['rating'] == 1){
+    $r1 = "checked";
+}elseif($result['rating'] == 2){
+    $r2= "checked";
+}elseif($result['rating'] === 3){
+    $r3= "checked";
+}elseif($result['rating'] === 4){
+    $r4= "checked";
+}elseif($result['rating'] === 5){
+    $r5= "checked";
+}
 ?>
 
 
@@ -78,23 +87,22 @@ if( $result['activity'] === "fw"){
 
         <input type="hidden" name="id" value="<?= h($result['id'])?>">
 
-        <?php var_dump($result);  ?>
         <div class="bold">日付</div>
         <input type="date" id="datepicker" name="ride_day" value="<?= h($result['ride_day'])?>">
-            <script>$(function() {
+            <!-- <script>$(function() {
                 $('#datepicker').datepicker({
                   dateFormat: 'yy/mm/dd'
                 });
 
             });
-            </script>
+            </script> -->
 
         <div> 
         <p class="bold">レッスン構成</p>
-            <label><input type="radio" name="activity" value="fw" <?php $fw ?>>フラットワーク</label>
-            <label><input type="radio" name="activity" value="ju" <?php $ju ?>>障害飛越</label>
-            <label><input type="radio" name="activity" value="dr" <?php $dr ?>>馬場馬術</label>
-            <label><input type="radio" name="activity" value="cc" <?php $cc ?>>クロスカントリー</label>
+            <label><input type="radio" name="activity" value="fw" <?php echo $fw; ?>>フラットワーク</label>
+            <label><input type="radio" name="activity" value="ju" <?php echo $ju; ?>>障害飛越</label>
+            <label><input type="radio" name="activity" value="dr" <?php echo $dr; ?>>馬場馬術</label>
+            <label><input type="radio" name="activity" value="cc" <?php echo $cc; ?>>クロスカントリー</label>
         </div>  
 
         
@@ -111,11 +119,11 @@ if( $result['activity'] === "fw"){
         <label><textArea name="horse_habit" rows="4" cols="40"><?=h($result['horse_habit'])?></textArea></label><br>
 
         <div class="bold">今日の自分に点数をつけるなら</div>
-            <label><input type="radio" name="rating" value="1">1</label>
-            <label><input type="radio" name="rating" value="2">2</label>
-            <label><input type="radio" name="rating" value="3">3</label>
-            <label><input type="radio" name="rating" value="4">4</label>
-            <label><input type="radio" name="rating" value="5">5</label>
+            <label><input type="radio" name="rating" value="1" <?php echo $r1; ?>>1</label>
+            <label><input type="radio" name="rating" value="2" <?php echo $r2; ?>>2</label>
+            <label><input type="radio" name="rating" value="3" <?php echo $r3; ?>>3</label>
+            <label><input type="radio" name="rating" value="4" <?php echo $r4; ?>>4</label>
+            <label><input type="radio" name="rating" value="5" <?php echo $r5; ?>>5</label>
         
         <div class="bold">今回のレッスンでうまくできたこと</div>
         <label><textArea name="good" rows="4" cols="40"><?=h($result['good'])?></textArea></label><br>
@@ -129,16 +137,6 @@ if( $result['activity'] === "fw"){
     <nav class="navbar navbar-default">
 
 
-
-
-
-
-
-
-
-
-
-    
             <div style="margin-top: 20px;">
         <a href="select.php"><button>データ一覧</button></a>
     </div>
