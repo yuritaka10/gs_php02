@@ -20,7 +20,13 @@ error_reporting(E_ALL);           //ここ：全てのレベルのエラーを�
 
     
  <header class="header">    
-      <h1>騎乗記録確認画面</h1>
+      <h1 class="app_name">騎乗記録確認画面</h1>
+      <nav>
+                <div><a class="nav" href="select.php">データ一覧</a></div>
+                <div><a class="nav" href="login.php">ログイン</a></div>
+                <div><a class="nav" href="logout.php">ログアウト</a></div>
+        </nav>
+
  </header> 
 
 <main>

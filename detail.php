@@ -6,7 +6,9 @@
  * 3. SQL部分にwhereを追加
  * 4. データ取得の箇所を修正。
  */
-
+session_start();
+require_once('funcs.php');
+loginCheck();
 
 
 $id = $_GET['id'];
@@ -76,7 +78,12 @@ if( $result['rating'] == 1){
 
 <body>
 <header class="header">
-    <h1>詳細画面</h1>
+    <h1 class="app_name">詳細画面</h1>
+    <nav>
+                <div><a class="nav" href="select.php">データ一覧</a></div>
+                <div><a class="nav" href="login.php">ログイン</a></div>
+                <div><a class="nav" href="logout.php">ログアウト</a></div>
+        </nav>
 </header> 
 
     <!-- method, action, 各inputのnameを確認してください。  -->

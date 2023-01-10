@@ -21,7 +21,31 @@ try {
     exit('DB Connection Error:' . $e->getMessage());
 }
 }
-//SQLエラー関数：sql_error($stmt)
+
+//SQLエラー
+function sql_error($stmt)
+{
+    //execute（SQL実行時にエラーがある場合）
+    $error = $stmt->errorInfo();
+    exit('SQLError:' . $error[2]);
+}
+
+//リダイレクト
+function redirect($file_name)
+{
+    header('Location: ' . $file_name);
+    exit();
+}
 
 
-//リダイレクト関数: redirect($file_name)
+// ログインチェク処理 loginCheck()
+function loginCheck(){
+    if(  !isset($_SESSION['chk_ssid']) ||$_SESSION['chk_ssid'] != session_id() ){
+        //ログインおかしい
+        exit('LOGIN ERROR1');
+    }else {
+        //ログインOK
+        session_regenerate_id(true);
+        $_SESSION['chk_ssid']= session_id();
+    }
+}

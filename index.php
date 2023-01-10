@@ -17,8 +17,19 @@
 
     
     <header class="header">
-    
-        <h1>SADDLE</h1>
+        <h1 class="app_name">SADDLE</h1>
+        <nav>
+                <div><a class="nav" href="select.php">データ一覧</a></div>
+                <div><a class="nav" href="login.php">ログイン</a></div>
+                <div><a class="nav" href="logout.php">ログアウト</a></div>
+        </nav>
+        <!-- <nav class="navbar navbar-default">
+            <div class="container-fluid"> -->
+                <!-- <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="login.php">ログイン</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="logout.php">ログアウト</a></div>
+            </div> -->
+        </nav>
     </header> 
 
     <main>
