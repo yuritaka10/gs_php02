@@ -14,7 +14,6 @@ error_reporting(E_ALL);           //ここ：全てのレベルのエラーを�
     <link rel="stylesheet" href="css/style.css">
     <?php require_once('./count.php'); ?>
 
-
 </head>
 <body>
 
@@ -22,7 +21,7 @@ error_reporting(E_ALL);           //ここ：全てのレベルのエラーを�
  <header class="header">    
       <h1 class="app_name">騎乗記録確認画面</h1>
       <nav>
-                <div><a class="nav" href="select.php">データ一覧</a></div>
+                <div><a class="nav" href="index.php">データ入力</a></div>
                 <div><a class="nav" href="login.php">ログイン</a></div>
                 <div><a class="nav" href="logout.php">ログアウト</a></div>
         </nav>
@@ -37,17 +36,34 @@ error_reporting(E_ALL);           //ここ：全てのレベルのエラーを�
       ?>
   </div>
 
-  <div>
-      <div class="container jumbotron"><?= $view ?></div>
-      
-  </div>
+      <div><?= $view ?></div>
 
 
-  <div style="margin-top: 20px;">
-        <a href="index.php"><button>レッスンを記録する</button></a>
-   </div>
+<canvas id="activity_chart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<div class="container jumbotron"></div>
 
 </main>
 
 </body>
 </html>
+
+  <?php require_once('./activity_chart.php'); ?>
+  <script>
+  var ctx = document.getElementById('activity_chart');
+  var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ['フラットワーク', '障害飛越', '馬場馬術','クロスカントリー'],
+    datasets: [{
+      data: [<?php echo $fw; ?>,<?php echo $ju; ?>,<?php echo $dr; ?>,<?php echo $cc; ?>],
+      backgroundColor: ['#1995AD', '#A1D6E2', '#BCBABE','#F1F1F2'],
+      weight: 100,
+    }],
+    options: {
+      responsive: true,
+      }},
+});
+
+</script>
+
